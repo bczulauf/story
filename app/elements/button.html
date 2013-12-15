@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="button-element"  attributes="">
+  <template>
+    <style>
+      /* styles for the custom element itself - lowest specificity */
+      :host { display: block; }
+      :host button {
+        background-color: #1294ff;
+        border: none;
+        border-radius: 3px;
+        color: #FFF;
+        width: 100%;
+        height: 40px;
+        font-family: 'Source Sans Pro';
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+    </style>
+    <button>Click Me</button>
+  </template>
+  <script>
+    Polymer('button-element', {
+      //applyAuthorStyles: true,
+      //resetStyleInheritance: true,
+
+      // element is fully prepared
+      ready: function(){ },
+      // instance of the element is created
+      created: function() { },
+      // instance was inserted into the document
+      enteredView: function() { },
+      // instance was removed from the document
+      leftView: function() { },
+      // attribute added, removed or updated
+      attributeChanged: function(attrName, oldVal, newVal) { }
+    });
+  </script>
+</polymer-element>

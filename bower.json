@@ -1,0 +1,19 @@
+{
+  "name": "story",
+  "version": "0.0.0",
+  "homepage": "https://github.com/bczulauf/story",
+  "authors": [
+    "bzoo <bczulauf@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.1.1"
+  }
+}

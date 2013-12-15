@@ -1,0 +1,52 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="button.html">
+
+<polymer-element name="phone-element"  attributes="">
+  <template>
+    <style>
+      /* styles for the custom element itself - lowest specificity */
+      :host { 
+        display: block;
+        background-color: #ebeced;
+        width: 320px; 
+        font-size: 18px;
+        border: 5px solid #272b31;
+        margin: 40px 10px;
+        float: left;
+        min-height: 400px;
+      }
+
+      :host #appcontent {
+        padding: 10px;
+      }
+      /* 
+      style if an ancestor has the different class
+      :host(.different) { } 
+      */
+    </style>
+    <div id="appcontent"></div>
+  </template>
+  <script>
+    Polymer('phone-element', {
+      //applyAuthorStyles: true,
+      //resetStyleInheritance: true,
+
+      // element is fully prepared
+      ready: function(){ 
+        var content = this.$.appcontent;
+        document.addEventListener('button', function(event) {
+          var element = document.createElement("button-element");
+          content.appendChild(element);
+          console.log(content);
+        });
+      },
+      created: function() { },
+      // instance was inserted into the document
+      enteredView: function() { },
+      // instance was removed from the document
+      leftView: function() { },
+      // attribute added, removed or updated
+      attributeChanged: function(attrName, oldVal, newVal) { }
+    });
+  </script>
+</polymer-element>

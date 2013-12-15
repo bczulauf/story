@@ -1,0 +1,64 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="nav-element"  attributes="">
+  <template>
+    <style>
+      /* styles for the custom element itself - lowest specificity */
+      :host { 
+        display: block;
+        font-size: 18px;
+        padding: 10px;
+      }
+
+      :host .logo {
+        font-weight: 600;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #FFF;
+        background-color: #1b1b1b;
+        float: left;
+      }
+
+      :host button.publish {
+        float: right;
+        height: 40px;
+        padding: 0px 20px;
+        border-radius: 3px;
+        border: none;
+        background-color: #FFF;
+        box-shadow: 0px 1px 3px rgba(0,0,0,.4);
+        font-family: 'Source Sans Pro';
+        font-size: 16px;
+        font-weight: 600;
+        color: #1b1b1b;
+      }
+      /* 
+      style if an ancestor has the different class
+      :host(.different) { } 
+      */
+    </style>
+    <nav class="clearfix">
+      <div class="logo">A</div>
+      <button class="publish">Publish</button>
+    </nav>
+  </template>
+  <script>
+    Polymer('nav-element', {
+      //applyAuthorStyles: true,
+      //resetStyleInheritance: true,
+
+      // element is fully prepared
+      ready: function(){ },
+      // instance of the element is created
+      created: function() { },
+      // instance was inserted into the document
+      enteredView: function() { },
+      // instance was removed from the document
+      leftView: function() { },
+      // attribute added, removed or updated
+      attributeChanged: function(attrName, oldVal, newVal) { }
+    });
+  </script>
+</polymer-element>

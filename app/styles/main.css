@@ -1,0 +1,21 @@
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin: 0px;
+	padding: 0px;
+	color: #1b1b1b;
+}
+
+.clear {
+	clear: both;
+}
+
+.clearfix:after {
+   clear:both;
+   content:' ';
+   display:block;
+   font-size:0;
+   line-height:0;
+   visibility:hidden;
+   width:0;
+   height:0
+}

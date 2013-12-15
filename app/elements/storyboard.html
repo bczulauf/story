@@ -1,0 +1,120 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="menu.html">
+
+<polymer-element name="storyboard-element"  attributes="">
+  <template>
+    <style>
+      /* styles for the custom element itself - lowest specificity */
+      :host { 
+        display: block;
+        float: left;
+        margin: 40px 0px 0px 30px;
+      }
+
+      :host #storyboard {
+        position: relative;
+      }
+
+      :host textarea {
+        width: 440px;
+        font-family: 'Merriweather';
+        font-size: 18px;
+        font-weight: 400;
+        border: none;
+        resize: none;
+        margin-top: 40px;
+        outline: none;
+      }
+
+      :host input {
+        outline: none;
+        border: none;
+        font-family: 'Source Sans Pro', sans-serif;
+        display: block;
+      }
+
+      :host input#title {
+        font-weight: 600;
+        font-size: 42px;
+      }
+
+      :host input#title::-webkit-input-placeholder {
+        color: #1b1b1b;
+      }
+
+      :host input#subtitle {
+        font-weight: 300;
+        font-size: 30px;
+      }
+
+      /* 
+      style if an ancestor has the different class
+      :host(.different) { } 
+      */
+    </style>
+    <input id="title" placeholder="Title">
+    <input id="subtitle" placeholder="Subtitle">
+    <div id="storyboard">
+      <textarea id="story" on-keyup="{{checkWords}}" on-keydown="{{captureKeys}}" placeholder="Write your app story"></textarea>
+    </div>
+  </template>
+  <script>
+    Polymer('storyboard-element', {
+      //applyAuthorStyles: true,
+      //resetStyleInheritance: true,
+      checkWords: function (e) {
+        var el = this.$.story;
+        var words = el.value.split(' ');
+        var pos = el.selectionStart;
+        var i;
+        var offset = 0;
+        if (e.which <= 90 && e.which >= 48) {
+          for (i = 0; i < words.length; i++) {
+            offset += words[i].length + 1;
+            if (offset > pos) break;
+          }
+          switch(words[i])
+          {
+            case "component": this.onDetectSpecialWord('component', pos);
+            break;
+            case "trigger": this.onDetectSpecialWord('trigger', pos);
+            break;
+            case "action": this.onDetectSpecialWord('action', pos);
+            default: console.log('not a special word');
+          }
+        }
+      },
+      onDetectSpecialWord: function (specialWord, pos) {
+        var menu = document.createElement("menu-element");
+        menu.setData(specialWord);
+        menu.setPosition(pos);
+        this.$.storyboard.appendChild(menu);
+      },
+      captureKeys: function (e) {
+        var menu = document.getElementById("menu");
+        if (menu!=null) {
+          var count = 1;
+          switch(e.which)
+          {
+            case 40: menu.getElementsByClassName("selected")[0].className = '';
+            menu.children[count + 1].className = "selected";
+            break;
+            case 13: console.log('enter') //queryselect menu and call add component passing in event + component name
+            break;
+          }
+        }
+        return false;
+      },
+      // element is fully prepared
+      ready: function(){ },
+      // instance of the element is created
+      created: function() { },
+      // instance was inserted into the document
+      enteredView: function() { },
+      // instance was removed from the document
+      leftView: function() { },
+      // attribute added, removed or updated
+      attributeChanged: function(attrName, oldVal, newVal) { }
+    });
+  </script>
+</polymer-element>

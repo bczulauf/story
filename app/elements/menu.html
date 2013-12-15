@@ -1,0 +1,87 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="menu-element"  attributes="">
+  <template>
+    <style>
+      /* styles for the custom element itself - lowest specificity */
+      :host { 
+        display: block;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background: #FFF;
+        border-radius: 3px;
+        box-shadow: 0px 1px 3px rgba(0,0,0,.4); 
+      }
+
+      :host ul {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      :host li {
+        padding: 0px 10px;
+      }
+
+      :host .selected {
+        background-color: yellow;
+      }
+      /* 
+      style if an ancestor has the different class
+      :host(.different) { } 
+      */
+    </style>
+    <ul id="menu">
+      <template repeat="{{list in lists}}">
+        <li on-click="{{addComponent}}" on-keydown="{{addComponent}}" id="{{list.name}}" class="{{list.class}}">{{list.name}}</li>
+      </template>
+    </ul>
+  </template>
+  <script>
+    Polymer('menu-element', {
+      xmlhttp: '',
+      ready: function(){ },
+      getData: function (url, callback) {
+        xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange = callback;
+        xmlhttp.open("GET",url,true);
+        xmlhttp.send();
+      },
+      setData: function (specialWord) {
+        var that = this;
+        this.getData(specialWord, function () {
+          if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            that.lists = [];
+            var list = JSON.parse(xmlhttp.response);
+            for (var i=0; i<list.length; i++) {
+              var item = {};
+              if (i == 0) {
+                item.name = list[i];
+                item.class = "selected";
+              }
+              else {
+                item.name = list[i];
+              }
+              that.lists.push(item)
+            }
+          }
+        })
+      },
+      setPosition: function (pos) {
+        console.log(pos);
+        this.style.top = pos;
+      },
+      addComponent: function (e) {
+        this.dispatchEvent(new CustomEvent(e.currentTarget.id, {bubbles: true}));
+      },
+      created: function() { },
+      // instance was inserted into the document
+      enteredView: function() { },
+      // instance was removed from the document
+      leftView: function() { },
+      // attribute added, removed or updated
+      attributeChanged: function(attrName, oldVal, newVal) { }
+    });
+  </script>
+</polymer-element>
